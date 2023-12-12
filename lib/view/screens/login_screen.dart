@@ -6,38 +6,13 @@ import 'package:contact_demo/view/widgets/shimmer/modal_load.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import '../theme/images.dart';
 import '../theme/spacing.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-
-  Future<bool> _requestPermission() async {
-    bool storageHasGranted = await Permission.storage.isGranted;
-    print("permiss $storageHasGranted");
-    if (!storageHasGranted) {
-      final status = await Permission.storage.request();
-      print("permiss  2$status");
-
-      return status.isGranted;
-    }
-    return storageHasGranted;
-  }
-
-  @override
-  void initState() {
-    _requestPermission();
-    super.initState();
-  }
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           .textTheme
                           .headlineSmall
                           ?.copyWith(
-                              color: Theme.of(context).colorScheme.primary),
+                          color: Theme.of(context).colorScheme.primary),
                     ),
                     const SizedBox(
                       height: spacing2x,
@@ -124,17 +99,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         suffixIcon: provider.isObscurePassword
                             ? IconButton(
-                                onPressed: () => provider.showPassword(),
-                                icon: const Icon(
-                                  Hicon.hide,
-                                ),
-                              )
+                          onPressed: () => provider.showPassword(),
+                          icon: const Icon(
+                            Hicon.hide,
+                          ),
+                        )
                             : IconButton(
-                                onPressed: () => provider.hidePassword(),
-                                icon: const Icon(
-                                  Hicon.show,
-                                ),
-                              ),
+                          onPressed: () => provider.hidePassword(),
+                          icon: const Icon(
+                            Hicon.show,
+                          ),
+                        ),
                       ),
                       onChanged: (val) => provider.password = val,
                       validator: (val) {
@@ -203,24 +178,19 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: Icon(MdiIcons.google, color: Colors.redAccent),
                         ),
                         IconButton(
-                          onPressed: () async {
-                            final isGranted = await _requestPermission();
-                            if (isGranted) {
-                              provider.submitFacebook(
-                                onSuccess: () {},
-                                onFailure: (message) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBarExtend.error(
-                                      context,
-                                      content: Text(
-                                        message ?? 'error',
-                                      ),
-                                    ),
-                                  );
-                                },
+                          onPressed: () => provider.submitFacebook(
+                            onSuccess: () {},
+                            onFailure: (message) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBarExtend.error(
+                                  context,
+                                  content: Text(
+                                    message ?? 'error',
+                                  ),
+                                ),
                               );
-                            }
-                          },
+                            },
+                          ),
                           icon: Icon(
                             MdiIcons.facebook,
                             color: Colors.blue,
@@ -238,3 +208,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
