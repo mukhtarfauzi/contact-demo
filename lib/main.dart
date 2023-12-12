@@ -4,8 +4,10 @@ import 'package:contact_demo/data/models/user_model.dart' show UserAdapter;
 import 'package:contact_demo/data/repositories/auth_firebase.dart';
 import 'package:contact_demo/providers/login.dart';
 import 'package:contact_demo/providers/manage_contact.dart';
+import 'package:contact_demo/providers/register.dart';
 import 'package:contact_demo/view/screens/home/home_screen.dart';
 import 'package:contact_demo/view/screens/login_screen.dart';
+import 'package:contact_demo/view/screens/register_screen.dart';
 import 'package:contact_demo/view/theme/themes.dart';
 import 'package:contact_demo/view/screens/auth_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,6 +44,10 @@ class MyApp extends StatelessWidget {
                 create: (_) => LoginProvider(),
                 child: const LoginScreen(),
               ),
+          '/register': (context) => ChangeNotifierProvider<RegisterProvider>(
+            create: (_) => RegisterProvider(),
+            child: const RegisterScreen(),
+          ),
           '/home': (context) =>ChangeNotifierProxyProvider<User, ManageContactProvider>(
             create: (_) => ManageContactProvider(),
             update: (_, auth, model) {
