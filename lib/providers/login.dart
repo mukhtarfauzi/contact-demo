@@ -42,7 +42,7 @@ class LoginProvider extends BaseProvider {
       loadingState = true;
       var response = await AuthFirebase.signInWithEmailAndPassword(
           email: email, password: password);
-      if (response.credential != null) {
+      if (response.user != null) {
         onSuccess();
       }
     } on FirebaseAuthException catch (e) {

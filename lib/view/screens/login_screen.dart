@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                         children: <TextSpan>[
                           TextSpan(
                             text: 'Make Account',
-                            recognizer: TapGestureRecognizer()..onTap = () {},
+                            recognizer: TapGestureRecognizer()..onTap = () => Navigator.pushReplacementNamed(context, '/register'),
                             style: TextStyle(
                                 color: Theme.of(context).colorScheme.primary),
                           ),
@@ -164,7 +164,7 @@ class LoginScreen extends StatelessWidget {
                           onPressed: () => provider.submitGoogle(
                             onSuccess: () => Navigator.pushReplacementNamed(context, '/home'),
                             onFailure: (message) {
-                              ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+                              ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBarExtend.error(
                                   context,
                                   content: Text(
@@ -180,7 +180,7 @@ class LoginScreen extends StatelessWidget {
                           onPressed: () => provider.submitFacebook(
                             onSuccess: () => Navigator.pushReplacementNamed(context, '/home'),
                             onFailure: (message) {
-                              ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+                              ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBarExtend.error(
                                   context,
                                   content: Text(
