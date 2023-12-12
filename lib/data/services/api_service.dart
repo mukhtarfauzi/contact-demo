@@ -1,13 +1,13 @@
 import 'package:contact_demo/data/repositories/rest_client.dart';
-import 'package:contact_demo/providers/auth.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:logger/logger.dart';
 
 class ApiService {
   late RestClient restClient;
   final _dio = Dio();
 
-  ApiService([AuthProvider? auth]) {
+  ApiService([User? auth]) {
     final logger = Logger();
     _dio.interceptors.add(
       LogInterceptor(responseBody: true, requestBody: true),
@@ -16,9 +16,10 @@ class ApiService {
       InterceptorsWrapper(
         onRequest: (request, handler) {
           logger.w("${request.uri}\n${request.data}");
-          if (auth?.auth != null && auth?.auth?.token != '') {
-            request.headers['Authorization'] = 'Bearer ${auth?.auth?.token!}';
-          }
+          // Notes: it will uses when you have dedicated rest API
+          // if (auth != null && auth.refreshToken != '') {
+          //   request.headers['Authorization'] = 'Bearer ${auth.refreshToken!}';
+          // }
           return handler.next(request);
         },
         onResponse: (response, handler) {
@@ -28,9 +29,8 @@ class ApiService {
         onError: (e, handler) async {
           logger.e(e.response ?? e.error);
           if (e.response?.statusCode == 401) {
-            if (auth?.auth != null && auth?.auth?.token != '') {
-              auth!.logout();
-            }
+            // Notes: if using rest API we can logout here
+            // auth!.logout();
           }
           return handler.next(e);
         },

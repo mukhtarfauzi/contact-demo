@@ -16,12 +16,6 @@ class AuthFirebase {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-
-    // Notes: only run on debug
-    // assert(() {
-    //   _auth.useAuthEmulator('localhost', 9099);
-    //   return true;
-    // }());
   }
 
   static setAuthPersist() async {
@@ -66,6 +60,10 @@ class AuthFirebase {
     }
     return null;
   }
+
+  static Stream<User?> authChanges () => _auth.authStateChanges();
+
+  static User? get currentUser => _auth.currentUser;
 
   static Future logout() async {
     _auth.signOut();

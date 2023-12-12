@@ -30,7 +30,7 @@ class User {
   Address? address;
 
   @HiveField(5)
-  @JsonKey(name: 'image')
+  @JsonKey(name: 'avatar')
   String? avatar;
 
   User({

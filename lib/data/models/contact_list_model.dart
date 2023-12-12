@@ -10,7 +10,7 @@ class ContactList  {
   @HiveField(0)
   List<User>? contacts;
 
-  ContactList() : super();
+  ContactList({this.contacts}) : super();
 
   factory ContactList.fromJson(Map<String, dynamic> json) => _$ContactListFromJson(json);
 

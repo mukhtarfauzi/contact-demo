@@ -14,5 +14,5 @@ abstract class RestClient {
   }
 
   @GET("/9cbc0889-47b2-40a0-aa5f-3b2e63fbf70e")
-  Future<ContactList> getContact();
+  Future<ContactList?> getContact();
 }

@@ -1,4 +1,6 @@
 import 'package:contact_demo/data/repositories/auth_firebase.dart';
+import 'package:contact_demo/providers/auth.dart' as auth;
+
 import 'package:contact_demo/providers/base.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -38,11 +40,12 @@ class LoginProvider extends BaseProvider {
   }) async {
     try {
       loadingState = true;
-      var response = await AuthFirebase.signInWithEmailAndPassword(email: email, password: password);
+      var response = await AuthFirebase.signInWithEmailAndPassword(
+          email: email, password: password);
       if (response.credential != null) {
         onSuccess();
       }
-    }on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       onFailure(e.message);
     } catch (e) {
       onFailure('Something went wrong');
@@ -58,21 +61,17 @@ class LoginProvider extends BaseProvider {
     try {
       loadingState = true;
       var response = await AuthFirebase.signInWithGoogle();
-      print("AHSJHADJSD ${response.toString()}");
       if (response != null) {
         onSuccess();
       }
-    }on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       onFailure(e.message);
     } catch (e) {
-      print("AHSJHADJSD ${e}");
-
       onFailure('Something went wrong');
     } finally {
       loadingState = false;
     }
   }
-
 
   Future<void> submitFacebook({
     required VoidCallback onSuccess,
@@ -84,11 +83,9 @@ class LoginProvider extends BaseProvider {
       if (response != null) {
         onSuccess();
       }
-    }on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       onFailure(e.message);
     } catch (e) {
-      print("AHSJHADJSD ${e}");
-
       onFailure('Something went wrong');
     } finally {
       loadingState = false;

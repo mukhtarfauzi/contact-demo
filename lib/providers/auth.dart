@@ -16,13 +16,6 @@ class AuthProvider with ChangeNotifier {
 
   bool get isLogin => _box.isNotEmpty && auth != null;
 
-  bool _initialized = false;
-  bool get initialized => _initialized;
-  set initialized(bool value) {
-    _initialized = value;
-    notifyListeners();
-  }
-
   void logout() {
     auth = null;
     AuthFirebase.logout();

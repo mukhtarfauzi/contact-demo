@@ -137,7 +137,7 @@ class LoginScreen extends StatelessWidget {
                               provider.submit(
                                 email: provider.email!,
                                 password: provider.password!,
-                                onSuccess: () {},
+                                onSuccess: () => Navigator.pushReplacementNamed(context, '/home'),
                                 onFailure: (message) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBarExtend.error(
@@ -157,15 +157,14 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(
                       height: spacing2x,
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         IconButton(
                           onPressed: () => provider.submitGoogle(
-                            onSuccess: () {},
+                            onSuccess: () => Navigator.pushReplacementNamed(context, '/home'),
                             onFailure: (message) {
-                              ScaffoldMessenger.of(context).showSnackBar(
+                              ScaffoldMessenger.maybeOf(context)?.showSnackBar(
                                 SnackBarExtend.error(
                                   context,
                                   content: Text(
@@ -179,9 +178,9 @@ class LoginScreen extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () => provider.submitFacebook(
-                            onSuccess: () {},
+                            onSuccess: () => Navigator.pushReplacementNamed(context, '/home'),
                             onFailure: (message) {
-                              ScaffoldMessenger.of(context).showSnackBar(
+                              ScaffoldMessenger.maybeOf(context)?.showSnackBar(
                                 SnackBarExtend.error(
                                   context,
                                   content: Text(

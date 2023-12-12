@@ -67,7 +67,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
           : Address.fromJson(json['address'] as Map<String, dynamic>),
       email: json['email'] as String?,
       phone: json['phone'] as String?,
-      avatar: json['image'] as String?,
+      avatar: json['avatar'] as String?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) {
@@ -84,6 +84,6 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('email', instance.email);
   writeNotNull('phone', instance.phone);
   writeNotNull('address', instance.address);
-  writeNotNull('image', instance.avatar);
+  writeNotNull('avatar', instance.avatar);
   return val;
 }
