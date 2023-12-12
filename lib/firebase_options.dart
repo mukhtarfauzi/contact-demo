@@ -67,6 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '632069230331',
     projectId: 'contact-demo-23',
     storageBucket: 'contact-demo-23.appspot.com',
+    androidClientId: '632069230331-ka7s2kt2ogcvnqsv3lvled30l03fdb2d.apps.googleusercontent.com',
+    iosClientId: '632069230331-t6upgv2dikig75pg1k71nof7bi6tivlf.apps.googleusercontent.com',
     iosBundleId: 'com.startapp.contactDemo',
   );
 
@@ -76,6 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '632069230331',
     projectId: 'contact-demo-23',
     storageBucket: 'contact-demo-23.appspot.com',
+    androidClientId: '632069230331-ka7s2kt2ogcvnqsv3lvled30l03fdb2d.apps.googleusercontent.com',
+    iosClientId: '632069230331-vkfsn2qvajnagd5ehj321ldp2mrjq4hp.apps.googleusercontent.com',
     iosBundleId: 'com.startapp.contactDemo.RunnerTests',
   );
 }

@@ -18,10 +18,10 @@ class AuthFirebase {
     );
 
     // Notes: only run on debug
-    assert(() {
-      _auth.useAuthEmulator('localhost', 9099);
-      return true;
-    }());
+    // assert(() {
+    //   _auth.useAuthEmulator('localhost', 9099);
+    //   return true;
+    // }());
   }
 
   static setAuthPersist() async {
@@ -65,5 +65,9 @@ class AuthFirebase {
       return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
     }
     return null;
+  }
+
+  static Future logout() async {
+    _auth.signOut();
   }
 }
