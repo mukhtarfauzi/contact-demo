@@ -3,11 +3,11 @@ import 'package:contact_demo/providers/auth.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
-class AppRepository {
+class ApiService {
   late RestClient restClient;
   final _dio = Dio();
 
-  AppRepository([AuthProvider? auth]) {
+  ApiService([AuthProvider? auth]) {
     final logger = Logger();
     _dio.interceptors.add(
       LogInterceptor(responseBody: true, requestBody: true),
