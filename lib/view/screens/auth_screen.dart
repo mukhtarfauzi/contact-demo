@@ -12,12 +12,17 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
 
-  void checkUserCredential() {
-    final currentUser = Provider.of<AuthFirebaseProvider>(context, listen: false).currentUser;
-    if(currentUser != null) {
-      Navigator.pushReplacementNamed(context, '/home');
-    }
-    Navigator.pushReplacementNamed(context, '/login');
+  void checkUserCredential() async {
+    Provider.of<AuthFirebaseProvider>(context, listen: false).authStateChanges.firstWhere((currentUser){
+        if(currentUser != null) {
+          Navigator.pushReplacementNamed(context, '/home');
+          return true;
+        }
+        return false;
+    }).timeout(Durations.extralong4, onTimeout: () {
+      Navigator.pushReplacementNamed(context, '/login');
+      return;
+    });
   }
 
   @override
@@ -31,8 +36,13 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Image.asset(logo),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(logo),
+          Center(child: CircularProgressIndicator())
+        ],
       ),
     );
   }
