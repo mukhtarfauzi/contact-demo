@@ -67,6 +67,7 @@ class LoginProvider extends BaseProvider {
     } on FirebaseAuthException catch (e) {
       onFailure(e.message);
     } catch (e) {
+      print(e);
       onFailure('Something went wrong');
     } finally {
       loadingState = false;

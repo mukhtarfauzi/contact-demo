@@ -40,25 +40,25 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.system,
         initialRoute: '/',
         routes: {
-          '/': (context) => ChangeNotifierProvider<LoginProvider>(
+          '/': (context) => const AuthScreen(),
+          '/login': (context) => ChangeNotifierProvider<LoginProvider>(
                 create: (_) => LoginProvider(),
                 child: const LoginScreen(),
               ),
           '/register': (context) => ChangeNotifierProvider<RegisterProvider>(
-            create: (_) => RegisterProvider(),
-            child: const RegisterScreen(),
-          ),
-          '/home': (context) =>ChangeNotifierProxyProvider<User, ManageContactProvider>(
-            create: (_) => ManageContactProvider(),
-            update: (_, auth, model) {
-              model!.auth = auth;
-              return model;
-            },
-            child: const HomeScreen(),
-          ),
+                create: (_) => RegisterProvider(),
+                child: const RegisterScreen(),
+              ),
+          '/home': (context) =>
+              ChangeNotifierProxyProvider<User, ManageContactProvider>(
+                create: (_) => ManageContactProvider(),
+                update: (_, auth, model) {
+                  model!.auth = auth;
+                  return model;
+                },
+                child: const HomeScreen(),
+              ),
         },
-        builder: (context, child) => AuthScreen(child: child),
-
       ),
     );
   }

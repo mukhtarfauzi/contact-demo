@@ -8,9 +8,8 @@ import '../../firebase_options.dart';
 // Notes: This repo is for make sure all auth call always using same instance
 // grouping all type method calling to Firebase Auth Service
 class AuthFirebase {
-  static final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  static final authStateChanges = _auth.authStateChanges;
+  static final authStateChanges = FirebaseAuth.instance.authStateChanges;
 
   static init() async {
     await Firebase.initializeApp(
@@ -19,18 +18,18 @@ class AuthFirebase {
   }
 
   static setAuthPersist() async {
-    await _auth.setPersistence(Persistence.LOCAL);
+    await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
   }
 
   static Future<UserCredential> createUser(
       {required String email, required String password}) async {
-    return await _auth.createUserWithEmailAndPassword(
+    return await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email, password: password);
   }
 
   static Future<UserCredential> signInWithEmailAndPassword(
       {required String email, required String password}) async {
-    return await _auth.signInWithEmailAndPassword(
+    return await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email, password: password);
   }
 
@@ -61,11 +60,11 @@ class AuthFirebase {
     return null;
   }
 
-  static Stream<User?> authChanges () => _auth.authStateChanges();
+  static Stream<User?> authChanges () => FirebaseAuth.instance.authStateChanges();
 
-  static User? get currentUser => _auth.currentUser;
+  static User? get currentUser => FirebaseAuth.instance.currentUser;
 
   static Future logout() async {
-    _auth.signOut();
+    FirebaseAuth.instance.signOut();
   }
 }
