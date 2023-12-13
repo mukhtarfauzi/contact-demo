@@ -1,4 +1,4 @@
-import 'package:contact_demo/data/repositories/auth_firebase.dart';
+import 'package:contact_demo/providers/auth_firebase.dart';
 import 'package:contact_demo/view/screens/home/bookmark_tab.dart';
 import 'package:contact_demo/view/screens/home/cloud_tab.dart';
 import 'package:contact_demo/view/theme/hicon_icons.dart';
@@ -6,14 +6,15 @@ import 'package:contact_demo/view/theme/images.dart';
 import 'package:contact_demo/view/theme/spacing.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    User? user = AuthFirebase.currentUser;
+    final provider = Provider.of<AuthFirebaseProvider>(context);
+    User? user = provider.currentUser;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -35,7 +36,10 @@ class HomeScreen extends StatelessWidget {
                     // onPressed: () => _activate(MenuEntry.about),
                   ),
                   MenuItemButton(
-                      onPressed: () => AuthFirebase.logout(),
+                      onPressed: () {
+                        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+                        provider.logout();
+                      },
                       child: Row(
                         children: [
                           Text(

@@ -1,13 +1,13 @@
+import 'package:contact_demo/providers/auth_firebase.dart';
 import 'package:contact_demo/data/repositories/rest_client.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:logger/logger.dart';
 
 class ApiService {
   late RestClient restClient;
   final _dio = Dio();
 
-  ApiService([User? auth]) {
+  ApiService([AuthFirebaseProvider? auth]) {
     final logger = Logger();
     _dio.interceptors.add(
       LogInterceptor(responseBody: true, requestBody: true),
@@ -17,8 +17,8 @@ class ApiService {
         onRequest: (request, handler) {
           logger.w("${request.uri}\n${request.data}");
           // Notes: it will uses when you have dedicated rest API
-          // if (auth != null && auth.refreshToken != '') {
-          //   request.headers['Authorization'] = 'Bearer ${auth.refreshToken!}';
+          // if (auth != null && auth.currentUser?.refreshToken != '') {
+          //   request.headers['Authorization'] = 'Bearer ${auth.currentUser?.refreshToken!}';
           // }
           return handler.next(request);
         },

@@ -1,6 +1,7 @@
-import 'package:contact_demo/data/repositories/auth_firebase.dart';
+import 'package:contact_demo/providers/auth_firebase.dart';
 import 'package:contact_demo/view/theme/images.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -11,17 +12,18 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
 
+  void checkUserCredential() {
+    final currentUser = Provider.of<AuthFirebaseProvider>(context, listen: false).currentUser;
+    if(currentUser != null) {
+      Navigator.pushReplacementNamed(context, '/home');
+    }
+    Navigator.pushReplacementNamed(context, '/login');
+  }
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      AuthFirebase.authChanges().listen((event) {
-        if(event != null) {
-          Navigator.pushReplacementNamed(context, '/home');
-          return;
-        }
-        Navigator.pushReplacementNamed(context, '/login');
-        return;
-      });
+      checkUserCredential();
     });
     super.initState();
   }

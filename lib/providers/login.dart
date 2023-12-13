@@ -1,11 +1,15 @@
-import 'package:contact_demo/data/repositories/auth_firebase.dart';
-import 'package:contact_demo/providers/auth.dart' as auth;
+import 'package:contact_demo/providers/auth_firebase.dart';
 
 import 'package:contact_demo/providers/base.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 class LoginProvider extends BaseProvider {
+  late AuthFirebaseProvider _auth;
+  set auth(AuthFirebaseProvider value) {
+    _auth = value;
+  }
+
   String? _email;
   String? _password;
 
@@ -40,7 +44,7 @@ class LoginProvider extends BaseProvider {
   }) async {
     try {
       loadingState = true;
-      var response = await AuthFirebase.signInWithEmailAndPassword(
+      var response = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       if (response.user != null) {
         onSuccess();
@@ -60,7 +64,7 @@ class LoginProvider extends BaseProvider {
   }) async {
     try {
       loadingState = true;
-      var response = await AuthFirebase.signInWithGoogle();
+      var response = await _auth.signInWithGoogle();
       if (response != null) {
         onSuccess();
       }
@@ -80,7 +84,7 @@ class LoginProvider extends BaseProvider {
   }) async {
     try {
       loadingState = true;
-      var response = await AuthFirebase.signInWithFacebook();
+      var response = await _auth.signInWithFacebook();
       if (response != null) {
         onSuccess();
       }
