@@ -1,16 +1,27 @@
-# contact_demo
+# Contact Demo
 
 Demo for Contact List Project
 
-## Getting Started
+## Installation
 
-This project is a starting point for a Flutter application.
+Install the dependency by using the flutter word [pub get](https://docs.flutter.dev/packages-and-plugins/using-packages).
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+flutter pub get
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## What you'll get in this repo?
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Authentication - [Firebase Auth](https://firebase.google.com/docs/auth/flutter/start)
+2. Login Method - [Email/Password](https://firebase.google.com/docs/auth/flutter/password-auth), [Google](https://pub.dev/packages/google_sign_in), & [Facebook](https://pub.dev/packages/flutter_facebook_auth)
+3. State Management - [Provider](https://pub.dev/packages/provider)
+4. Network - [Dio](https://pub.dev/packages/dio)
+5. Rest Api Repository - [Retrofit](https://pub.dev/packages/retrofit)
+6. Mocking Api - [Fake API](https://mocki.io/fake-json-api)
+7. Model Data - [JSON Serializable](https://pub.dev/packages/json_serializable)
+8. Local Database - [Hive](https://pub.dev/packages/hive)
+
+## Next Step
+
+I'm working further on a different stack approach.
+Find another branch later.
