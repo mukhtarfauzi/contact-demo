@@ -33,12 +33,11 @@ class HomeScreen extends StatelessWidget {
                       user.email ?? '-',
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    // onPressed: () => _activate(MenuEntry.about),
                   ),
                   MenuItemButton(
                       onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-                        provider.logout();
+                        provider.logout().then((_) => Navigator.pushNamedAndRemoveUntil(
+                            context, '/', (route) => false));
                       },
                       child: Row(
                         children: [
@@ -77,15 +76,18 @@ class HomeScreen extends StatelessWidget {
               ),
           ],
           bottom: const TabBar(tabs: [
-            Tab(text: "Cloud", icon: Icon(Icons.cloud),),
-            Tab(text: "Bookmark", icon: Icon(Icons.bookmark),),
+            Tab(
+              text: "Cloud",
+              icon: Icon(Icons.cloud),
+            ),
+            Tab(
+              text: "Bookmark",
+              icon: Icon(Icons.bookmark),
+            ),
           ]),
         ),
         body: TabBarView(
-          children: [
-            CloudTab(),
-            BookmarkTab()
-          ],
+          children: [CloudTab(), BookmarkTab()],
         ),
       ),
     );

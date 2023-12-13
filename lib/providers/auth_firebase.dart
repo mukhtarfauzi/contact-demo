@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import '../firebase_options.dart';
-
 // Notes: This class is for make sure all auth call always using same instance
 // grouping all type method calling from Firebase Auth Service
 // Be represented as a provider to handle auth
@@ -57,7 +55,5 @@ class AuthFirebaseProvider extends ChangeNotifier {
 
   User? get currentUser => repository.currentUser;
 
-  Future logout() async {
-    repository.signOut();
-  }
+  Future logout() => repository.signOut();
 }
